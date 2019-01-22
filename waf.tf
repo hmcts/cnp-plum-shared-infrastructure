@@ -9,7 +9,7 @@ data "azurerm_key_vault_secret" "cert" {
 }
 
 data "azurerm_subnet" "app_gateway_subnet" {
-  name                 = "app-gateway-${var.env}"
+  name                 = "${var.infra_location}-subnet-0-${var.env}"
   virtual_network_name = "${var.infra_location}-vnet-${var.env}"
   resource_group_name  = "${var.infra_location}-${var.env}"
 }
