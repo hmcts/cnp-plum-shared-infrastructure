@@ -5,7 +5,7 @@ variable "subscription" {}
 variable "product" {
   type        = "string"
   description = "The name of your application"
-  default     = "rhubarb"
+  default     = "plum"
 }
 
 variable "env" {
@@ -69,8 +69,8 @@ variable "certificate_name" {
 
 variable "public_hostname" {
   type = "string"
-  default = "rhubarb.platform.hmcts.net"
-  description = "The public hostanme to use when accessing rhubarb's frontend"
+  default = "plum.platform.hmcts.net"
+  description = "The public hostanme to use when accessing plum's frontend"
 }
 
 variable "health_check_interval" {

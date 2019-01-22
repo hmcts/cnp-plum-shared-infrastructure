@@ -1,6 +1,6 @@
-# cnp-rhubarb-shared-infrastructure
+# cnp-plum-shared-infrastructure
 
-This repository contains the shared the common infra components per Environment (persistent) for Rhubarb
+This repository contains the shared the common infra components per Environment (persistent) for Plum
 
 - Application Insights
 - Azure Key Vault
