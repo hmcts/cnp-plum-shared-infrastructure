@@ -14,7 +14,7 @@ import uk.gov.hmcts.contino.Environment
 Environment environment = new Environment(env)
 
 onMaster {
-  sharedInfrastructurePipeline('rhubarb-shared-infrastructure', environment.nonProdName, 'nonprod')
-  sharedInfrastructurePipeline('rhubarb-shared-infrastructure', environment.demoName, 'nonprod')
-  sharedInfrastructurePipeline('rhubarb-shared-infrastructure', environment.prodName, 'prod')
+  sharedInfrastructurePipeline('plum-shared-infrastructure', environment.nonProdName, 'nonprod')
+  sharedInfrastructurePipeline('plum-shared-infrastructure', environment.demoName, 'nonprod')
+  //sharedInfrastructurePipeline('plum-shared-infrastructure', environment.prodName, 'prod')
 }

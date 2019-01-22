@@ -5,7 +5,7 @@ import groovy.json.JsonSlurper
 
 properties([
     parameters([
-        string(name: 'PRODUCT_NAME', defaultValue: 'rhubarb', description: ''),
+        string(name: 'PRODUCT_NAME', defaultValue: 'plum', description: ''),
         string(name: 'DEPLOYMENT_TARGET', defaultValue: '', description: 'Suffix for environment'),
         string(name: 'ENVIRONMENT', defaultValue: 'sandbox', description: 'Suffix for resources created'),
         choice(name: 'SUBSCRIPTION', choices: 'sandbox\nnonprod\nprod', description: 'Azure subscriptions available to build in'),
@@ -27,7 +27,7 @@ node {
   env.PATH = "$env.PATH:/usr/local/bin"
   def az = { cmd -> return sh(script: "env AZURE_CONFIG_DIR=/opt/jenkins/.azure-$subscription az $cmd", returnStdout: true).trim() }
 
-  stageCheckout('git@github.com:hmcts/moj-rhubarb-shared-infrastructure.git')
+  stageCheckout('git@github.com:hmcts/cnp-plum-shared-infrastructure.git')
 
   withSubscription(subscription) {
     // no deploymentTarget applicable in root directory
