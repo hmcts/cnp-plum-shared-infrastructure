@@ -20,7 +20,7 @@ module "waf" {
   subscription      = "${var.subscription}"
   location          = "${var.location}"
   wafName           = "${var.product}"
-  resourcegroupname = "${azurerm_resource_group.shared_resource_group_te.name}"
+  resourcegroupname = "${azurerm_resource_group.shared_resource_group.name}"
   use_authentication_cert = true
 
   # vNet connections
