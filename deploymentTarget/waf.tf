@@ -89,7 +89,7 @@ module "waf" {
       port                           = 443
       Protocol                       = "Https"
       CookieBasedAffinity            = "Disabled"
-      AuthenticationCertificates     = "ilbCert"
+      AuthenticationCertificates     = ""
       probeEnabled                   = "True"
       probe                          = "https-probe"
       PickHostNameFromBackendAddress = "True"
