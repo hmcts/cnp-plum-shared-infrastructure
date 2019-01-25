@@ -12,13 +12,6 @@ locals {
   ]
 }
 
-# data "null_data_source" "waf-pip" {
-#   inputs = {
-#     pip = "${module.waf.public_ip_fqdn}"     
-#   }
-#   depends_on = ["module.waf"]
-# }
-
 data "template_file" "endpoints" {
   template = "${file("${path.module}/templates/traffic-manager-endpoint.tpl")}"
   count    = "1"

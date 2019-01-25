@@ -6,6 +6,7 @@ data "null_data_source" "waf-pip" {
   depends_on = ["module.waf"]
 }
 
+// note: add 'Custom Header settings: "Host:plum.platform.hmcts.net"
 resource "azurerm_traffic_manager_endpoint" "endpoint" {
   name                = "${local.backend_name}"
   resource_group_name = "${var.product}-shared-infrastructure-${var.env}"
