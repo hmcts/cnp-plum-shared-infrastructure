@@ -15,7 +15,7 @@ data "azurerm_subnet" "app_gateway_subnet" {
 }
 
 module "waf" {
-  source            = "git@github.com:hmcts/cnp-module-waf?ref=cnp-1094-dt"
+  source            = "git@github.com:hmcts/cnp-module-waf?ref=master"
   env               = "${var.env}"
   deployment_target = "${var.deployment_target}"
   subscription      = "${var.subscription}"
