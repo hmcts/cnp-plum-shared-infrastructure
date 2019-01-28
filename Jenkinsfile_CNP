@@ -11,7 +11,7 @@ properties([
 import uk.gov.hmcts.contino.Environment
 
 planOnly = params.PLAN_ONLY
-deploymentTarget = 'v2'
+deploymentTarget = '-v2'
 Environment environment = new Environment(env)
 
 onMaster {
