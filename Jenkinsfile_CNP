@@ -16,7 +16,7 @@ Environment environment = new Environment(env)
 
 onMaster {
   sharedInfrastructurePipeline('plum', environment.nonProdName, 'nonprod', planOnly,deploymentTarget)
-  sharedInfrastructurePipeline('plum', environment.demoName, 'nonprod', planOnly,deploymentTarget)
+  //sharedInfrastructurePipeline('plum', environment.demoName, 'nonprod', planOnly,deploymentTarget)
   //sharedInfrastructurePipeline('plum', environment.prodName, 'prod', planOnly,deploymentTarget)
 }
 
