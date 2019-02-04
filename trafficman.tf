@@ -8,13 +8,20 @@ locals {
       priority    = "1"
       status      = "Disabled"
       host_header = ""
+    },
+    {
+      name        = "${local.backend_name}"
+      target      = "${data.null_data_source.waf-pip.outputs["pip"]}"
+      priority    = "2"
+      status      = "Enabled"
+      host_header = "${var.public_hostname}" // // This has to be the same hostname used in the listeners of the WAF
     }
   ]
 }
 
 data "template_file" "endpoints" {
   template = "${file("${path.module}/templates/traffic-manager-endpoint.tpl")}"
-  count    = "1"
+  count    = "2"
 
   vars {
     name        = "${lookup(local.traffic_manager_endpoints[count.index], "name")}"
@@ -55,11 +62,11 @@ data "null_data_source" "waf-pip" {
   depends_on = ["module.waf"]
 }
 
-resource "azurerm_traffic_manager_endpoint" "endpoint" {
-  name                = "${local.backend_name}"
-  resource_group_name = "${var.product}-shared-infrastructure-${var.env}"
-  profile_name        = "${var.product}-${var.env}"
-  target              = "${data.null_data_source.waf-pip.outputs["pip"]}"
-  type                = "externalEndpoints"
-  weight              = 100
-}
+# resource "azurerm_traffic_manager_endpoint" "endpoint" {
+#   name                = "${local.backend_name}"
+#   resource_group_name = "${var.product}-shared-infrastructure-${var.env}"
+#   profile_name        = "${var.product}-${var.env}"
+#   target              = "${data.null_data_source.waf-pip.outputs["pip"]}"
+#   type                = "externalEndpoints"
+#   weight              = 100
+# }
