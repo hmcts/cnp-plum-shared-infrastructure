@@ -1,5 +1,5 @@
 module "trafficManagerProfile" {
-  source                  = "git@github.com:hmcts/cnp-module-trafficmanager"
+  source                  = "git@github.com:hmcts/cnp-module-trafficmanager?ref=cnp-1180"
   backend_name            = "${local.backend_name}"
   backend_pip             = "${data.null_data_source.waf-pip.outputs["pip"]}"
   public_hostname         = "${var.public_hostname}"
