@@ -68,9 +68,9 @@ module "trafficManagerProfile" {
 # }
 
 
-# data "null_data_source" "waf-pip" {
-#   inputs = {
-#     pip = "${module.waf.public_ip_fqdn}"     
-#   }
-#   depends_on = ["module.waf"]
-# }
+data "null_data_source" "waf-pip" {
+  inputs = {
+    pip = "${module.waf.public_ip_fqdn}"     
+  }
+  depends_on = ["module.waf"]
+}
