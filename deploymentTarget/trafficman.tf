@@ -18,5 +18,3 @@ data "null_data_source" "waf-pip" {
   }
   depends_on = ["module.waf"]
 }
-
-
