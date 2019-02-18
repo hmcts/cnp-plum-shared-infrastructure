@@ -8,7 +8,7 @@ module "trafficManagerProfileEndpoint" {
   product                 = "${var.product}"
   env                     = "${var.env}"
   common_tags             = "${var.common_tags}"
-  resource_group          = "${azurerm_resource_group.shared_resource_group.name}"
+  resource_group          = "${var.product}-shared-infrastructure-${var.env}"
 }
 
 # locals {
