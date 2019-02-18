@@ -4,7 +4,7 @@ module "trafficManagerProfileEndpoint" {
   backend_name            = "${local.backend_name}"
   backend_pip             = "${data.null_data_source.waf-pip.outputs["pip"]}"
   public_hostname         = "${var.public_hostname}"
-  priority                = "3"
+  priority                = "3"   // 1 = shutter-page, 2 = legacy, 3 = DT
   product                 = "${var.product}"
   env                     = "${var.env}"
   common_tags             = "${var.common_tags}"
