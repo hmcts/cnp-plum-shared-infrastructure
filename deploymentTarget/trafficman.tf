@@ -1,7 +1,6 @@
 
 module "trafficManagerProfileEndpoint" {
   source                  = "git@github.com:hmcts/cnp-module-trafficmanager-endpoint?ref=master"
-  shutter-page_target     = "mojmaintenance.azurewebsites.net"
   backend_name            = "${local.backend_name}"
   backend_pip             = "${module.waf.public_ip_fqdn}" 
   public_hostname         = "${var.public_hostname}"
