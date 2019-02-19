@@ -27,4 +27,5 @@ module "trafficManagerProfile" {
   common_tags               = "${var.common_tags}"
   resource_group            = "${azurerm_resource_group.shared_resource_group.name}"
   traffic_manager_endpoints = "${local.traffic_manager_endpoints}"
+  endpoints_count           = "2"
 }
