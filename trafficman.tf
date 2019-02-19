@@ -1,5 +1,5 @@
 module "trafficManagerProfile" {
-  source                  = "git@github.com:hmcts/cnp-module-trafficmanager?ref=cnp-1180"
+  source                  = "git@github.com:hmcts/cnp-module-trafficmanager?ref=master"
   shutter-page_target     = "mojmaintenance.azurewebsites.net"
   org_name                =  "hmcts-"
   backend_name            = "${local.backend_name}"
