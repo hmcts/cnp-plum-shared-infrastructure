@@ -20,7 +20,7 @@ locals {
 }
 
 module "trafficManagerProfile" {
-  source                    = "git@github.com:hmcts/cnp-module-trafficmanager?ref=cnp-1180"
+  source                    = "git@github.com:hmcts/cnp-module-trafficmanager?ref=master"
   org_name                  =  "hmcts"
   product                   = "${var.product}"
   env                       = "${var.env}"
