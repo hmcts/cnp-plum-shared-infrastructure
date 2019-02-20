@@ -97,5 +97,5 @@ variable "common_tags" {
   type = "map"
 }
 
-# variable deployment_target {
-# }
+variable deployment_target {
+}
