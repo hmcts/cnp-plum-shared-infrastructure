@@ -19,29 +19,29 @@ variable "location" {
   default     = "UK South"
 }
 
-//APP INSIGHTS SPECIFIC VARIABLES
-variable "appinsights_location" {
-  type        = "string"
-  description = "Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created."
-  default     = "UK South"
-}
+# //APP INSIGHTS SPECIFIC VARIABLES
+# variable "appinsights_location" {
+#   type        = "string"
+#   description = "Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created."
+#   default     = "UK South"
+# }
 
-variable "application_type" {
-  type        = "string"
-  description = "This is the type of application you are creating app insights. Valid values are Web and Other"
-  default     = "Web"
-}
+# variable "application_type" {
+#   type        = "string"
+#   description = "This is the type of application you are creating app insights. Valid values are Web and Other"
+#   default     = "Web"
+# }
 
-//KEY VAULT SPECIFIC VARIABLES
-variable "tenant_id" {
-  type        = "string"
-  description = "The Tenant ID of the Azure Active Directory"
-}
+# //KEY VAULT SPECIFIC VARIABLES
+# variable "tenant_id" {
+#   type        = "string"
+#   description = "The Tenant ID of the Azure Active Directory"
+# }
 
-variable "jenkins_AAD_objectId" {
-  type        = "string"
-  description = "This is the ID of the Application you wish to give access to the Key Vault via the access policy"
-}
+# variable "jenkins_AAD_objectId" {
+#   type        = "string"
+#   description = "This is the ID of the Application you wish to give access to the Key Vault via the access policy"
+# }
 
 variable "team_contact" {
   type        = "string"
@@ -49,11 +49,11 @@ variable "team_contact" {
   default     = "#Cloud-Native"
 }
 
-variable "destroy_me" {
-  type        = "string"
-  description = "Here be dragons! In the future if this is set to Yes then automation will delete this resource on a schedule. Please set to No unless you know what you are doing"
-  default     = "No"
-}
+# variable "destroy_me" {
+#   type        = "string"
+#   description = "Here be dragons! In the future if this is set to Yes then automation will delete this resource on a schedule. Please set to No unless you know what you are doing"
+#   default     = "No"
+# }
 
 // ASP SPECIFIC VARIABLES
 variable "asp_capacity" {
@@ -97,5 +97,5 @@ variable "common_tags" {
   type = "map"
 }
 
-variable deployment_target {
-}
+# variable deployment_target {
+# }

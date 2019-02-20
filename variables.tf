@@ -49,17 +49,17 @@ variable "team_contact" {
   default     = "#Cloud-Native"
 }
 
-variable "destroy_me" {
-  type        = "string"
-  description = "Here be dragons! In the future if this is set to Yes then automation will delete this resource on a schedule. Please set to No unless you know what you are doing"
-  default     = "No"
-}
+# variable "destroy_me" {
+#   type        = "string"
+#   description = "Here be dragons! In the future if this is set to Yes then automation will delete this resource on a schedule. Please set to No unless you know what you are doing"
+#   default     = "No"
+# }
 
-// ASP SPECIFIC VARIABLES
-variable "asp_capacity" {
-  type    = "string"
-  default = "2"
-}
+# // ASP SPECIFIC VARIABLES
+# variable "asp_capacity" {
+#   type    = "string"
+#   default = "2"
+# }
 
 variable "certificate_name" {
   type = "string"
