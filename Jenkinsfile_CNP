@@ -5,5 +5,4 @@
 def product = "plum"
 
 withInfraPipeline(product) {
-  env.TF_LOG = 'TRACE'  
 }
