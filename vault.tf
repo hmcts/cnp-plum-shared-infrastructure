@@ -20,7 +20,7 @@ module "vault" {
   resource_group_name     = "${azurerm_resource_group.shared_resource_group.name}"
   product_group_object_id = "300e771f-856c-45cc-b899-40d78281e9c1"
   common_tags = "${local.tags}"
-  managed_identity_object_ids= ["${var.managed_identity_object_id}"]
+  managed_identity_object_ids= ["${azurerm_user_assigned_identity.plum-identity.principal_id}","${var.managed_identity_object_id}"]
 }
 
 output "vaultName" {
