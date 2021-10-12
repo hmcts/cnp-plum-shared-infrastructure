@@ -6,7 +6,6 @@ import groovy.json.JsonSlurper
 properties([
     parameters([
         string(name: 'PRODUCT_NAME', defaultValue: 'plum', description: ''),
-        string(name: 'DEPLOYMENT_TARGETS', defaultValue: '', description: 'Comma-separateed list of deployment targets, leave empty for environment defaults'),
         string(name: 'ENVIRONMENT', defaultValue: 'sandbox', description: 'Suffix for resources created'),
         choice(name: 'SUBSCRIPTION', choices: 'sandbox\nnonprod\nprod', description: 'Azure subscriptions available to build in')
     ])
@@ -16,9 +15,8 @@ properties([
 productName = params.PRODUCT_NAME
 subscription = params.SUBSCRIPTION
 environment = params.ENVIRONMENT
-deploymentTargets = params.DEPLOYMENT_TARGETS
 
-echo "Building '${productName}' in '${environment}' depoyment targets '${deploymentTargets}'"
+echo "Building '${productName}' in '${environment}'"
 
-withParameterizedInfraPipeline(productName, environment, subscription, deploymentTargets) {
+withParameterizedInfraPipeline(productName, environment, subscription) {
 }
