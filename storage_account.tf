@@ -10,16 +10,20 @@ locals {
   
   sa_aat_subnets = [
     data.azurerm_subnet.aks-00-aat.id,
-    data.azurerm_subnet.aks-01-aat.id]
+    data.azurerm_subnet.aks-01-aat.id,
+    data.azurerm_subnet.aks-00-infra.id,
+    data.azurerm_subnet.aks-01-infra.id,
+    data.azurerm_subnet.jenkins_subnet.id]
 
   sa_prod_subnets = [
     data.azurerm_subnet.aks-00-prod.id,
-    data.azurerm_subnet.aks-01-prod.id]
+    data.azurerm_subnet.aks-01-prod.id,
+    data.azurerm_subnet.jenkins_subnet.id]
 
   sa_other_subnets = [
     data.azurerm_subnet.jenkins_subnet.id]
 
-  sa_subnets = split(",", var.env == "aat" ? join(",", local.sa_aat_subnets) : join(",", local.sa_other_subnets) || var.env == "aat" ? join(",", local.sa_aat_subnets): join(",", local.sa_other_subnets))
+  sa_subnets = split(",", var.env == "prod" ? join(",", local.sa_prod_subnets) : join(",", local.sa_other_subnets) || var.env == "aat" ? join(",", local.sa_aat_subnets): join(",", local.sa_other_subnets))
 }
 
 provider "azurerm" {
@@ -101,14 +105,14 @@ data "azurerm_virtual_network" "aks_core_vnet" {
   resource_group_name = local.vnet_resource_group_name
 }
 
-data "azurerm_subnet" "aks_00" {
+data "azurerm_subnet" "aks-00-infra" {
   provider             = azurerm.aks-infra
   name                 = "aks-00"
   virtual_network_name = data.azurerm_virtual_network.aks_core_vnet.name
   resource_group_name  = data.azurerm_virtual_network.aks_core_vnet.resource_group_name
 }
 
-data "azurerm_subnet" "aks_01" {
+data "azurerm_subnet" "aks-01-infra" {
   provider             = azurerm.aks-infra
   name                 = "aks-01"
   virtual_network_name = data.azurerm_virtual_network.aks_core_vnet.name
