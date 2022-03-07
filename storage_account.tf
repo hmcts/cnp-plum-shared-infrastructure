@@ -45,14 +45,14 @@ module "pcq_storage_account" {
 ////////////////////////////////////////////////
 
 data "azurerm_subnet" "aat_aks_00_subnet" {
-  provider             = azurerm.aks-prod
+  provider             = azurerm.aks-aat
   name                 = "aks-00"
   virtual_network_name = local.aat_cft_vnet_name
   resource_group_name  = local.aat_cft_vnet_resource_group
 }
 
 data "azurerm_subnet" "aat_aks_01_subnet" {
-  provider             = azurerm.aks-prod
+  provider             = azurerm.aks-aat
   name                 = "aks-01"
   virtual_network_name = local.aat_cft_vnet_name
   resource_group_name  = local.aat_cft_vnet_resource_group
@@ -167,6 +167,12 @@ provider "azurerm" {
 provider "azurerm" {
   alias           = "aks-prod"
   subscription_id = "8cbc6f36-7c56-4963-9d36-739db5d00b27"
+  features {}
+}
+
+provider "azurerm" {
+  alias           = "aks-aat"
+  subscription_id = "96c274ce-846d-4e48-89a7-d528432298a7"
   features {}
 }
 
