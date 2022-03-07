@@ -25,7 +25,7 @@ locals {
     data.azurerm_subnet.aks-00-infra.id,
     data.azurerm_subnet.aks-01-infra.id]
 
-  sa_subnets = split(",", var.env == "prod" ? join(",", local.sa_prod_subnets) : join(",", local.sa_other_subnets) || var.env == "aat" ? join(",", local.sa_aat_subnets): join(",", local.sa_other_subnets))
+  sa_subnets = contains(",", var.env == "prod" ? join(",", local.sa_prod_subnets) : join(",", local.sa_other_subnets) || var.env == "aat" ? join(",", local.sa_aat_subnets): join(",", local.sa_other_subnets))
 }
 
 provider "azurerm" {
