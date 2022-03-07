@@ -17,8 +17,7 @@ locals {
     data.azurerm_subnet.aks-01-prod.id]
 
   sa_other_subnets = [
-    data.azurerm_subnet.jenkins_subnet.id,
-    data.azurerm_subnet.aks-mgmt.id]
+    data.azurerm_subnet.jenkins_subnet.id]
 
   sa_subnets = split(",", var.env == "aat" ? join(",", local.sa_aat_subnets) : join(",", local.sa_other_subnets) || var.env == "aat" ? join(",", local.sa_aat_subnets): join(",", local.sa_other_subnets))
 }
