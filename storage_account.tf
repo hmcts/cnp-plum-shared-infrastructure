@@ -16,8 +16,8 @@ locals {
     data.azurerm_subnet.aks-00-infra.id,
     data.azurerm_subnet.aks-01-infra.id]
 
-  preview_subnets  = var.env == "prod" ? [data.azurerm_subnet.aks-00-preview.id.id, data.azurerm_subnet.aks-00-preview.id.id] : []
-  cft_aat_subnets = var.env == "aat" ? [data.azurerm_subnet.aat_aks_00_subnet.id, data.azurerm_subnet.aat_aks_01_subnet.id, data.azurerm_subnet.aks-00-preview.id.id, data.azurerm_subnet.aks-00-preview.id.id] : []
+  preview_subnets  = var.env == "prod" ? [data.azurerm_subnet.aks-00-preview.id, data.azurerm_subnet.aks-00-preview.id] : []
+  cft_aat_subnets = var.env == "aat" ? [data.azurerm_subnet.aat_aks_00_subnet.id, data.azurerm_subnet.aat_aks_01_subnet.id, data.azurerm_subnet.aks-00-preview.id, data.azurerm_subnet.aks-00-preview.id] : []
   sa_subnets    = concat(local.standard_subnets, local.preview_subnets, local.cft_aat_subnets)
 
 }
