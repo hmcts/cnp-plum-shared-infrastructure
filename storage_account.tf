@@ -7,7 +7,7 @@ locals {
 
   vnet_name = var.env == "sbox" || var.env == "perftest" || var.env == "ithc" || var.env == "preview" ? "cft-${var.env}-vnet" : "core-${var.env}-vnet"
   vnet_resource_group_name = var.env == "sbox" || var.env == "perftest" || var.env == "ithc" || var.env == "preview" ? "cft-${var.env}-network-rg" : "aks-infra-${var.env}-rg"
-
+  
   sa_aat_subnets = [
     data.azurerm_subnet.aks-00-aat.id,
     data.azurerm_subnet.aks-01-aat.id]
@@ -97,8 +97,8 @@ data "azurerm_subnet" "jenkins_subnet" {
 
 data "azurerm_virtual_network" "aks_core_vnet" {
   provider            = azurerm.aks-infra
-  name                = local.aks_core_vnet
-  resource_group_name = local.aks_core_vnet_rg
+  name                = local.vnet_name
+  resource_group_name = local.vnet_resource_group_name
 }
 
 data "azurerm_subnet" "aks_00" {
