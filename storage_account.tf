@@ -28,14 +28,14 @@ provider "azurerm" {
 provider "azurerm" {
   alias                      = "aks-infra"
   skip_provider_registration = true
-  subscription_id            = var.aks_infra_subscription_id
+  subscription_id            = "96c274ce-846d-4e48-89a7-d528432298a7"
   features {}
 }
 
 provider "azurerm" {
   alias                      = "mgmt"
   skip_provider_registration = true
-  subscription_id            = var.jenkins_subscription_id
+  subscription_id            = "1baf5470-1c3e-40d3-a6f7-74bfbce4b348"
   features {}
 }
 
@@ -89,22 +89,17 @@ data "azurerm_subnet" "aks_01" {
 module "storage_account" {
   source                   = "git@github.com:hmcts/cnp-module-storage-account?ref=master"
   env                      = var.env
-  storage_account_name     = local.account_name
-  resource_group_name      = azurerm_resource_group.rg.name
+  storage_account_name     = "plum-sa-test"
+  resource_group_name      = azurerm_resource_group.shared_resource_group.name
   location                 = var.location
   account_kind             = "StorageV2"
   account_tier             = "Standard"
   account_replication_type = "LRS"
   access_tier              = "Hot"
-
-  //  enable_blob_encryption    = true
-  //  enable_file_encryption    = true
   enable_https_traffic_only = true
 
   // Tags
   common_tags  = local.tags
-  team_contact = var.team_contact
-  destroy_me   = var.destroy_me
 
   sa_subnets = local.all_valid_subnets
 
