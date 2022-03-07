@@ -8,20 +8,43 @@ locals {
   aks_core_vnet = var.env == "preview" ? join("-", ["cft", var.env, "vnet"]) : join("-", ["core", var.env, "vnet"])
   aks_core_vnet_rg = var.env == "preview" ? join("-", ["cft", var.env, "network-rg"]) : join("-", ["aks-infra", var.env, "rg"])
 
-  valid_subnets = [
-    data.azurerm_subnet.aks_00.id,
-    data.azurerm_subnet.aks_01.id,
+  sa_aat_subnets = [
     data.azurerm_subnet.jenkins_subnet.id,
-  ]
+    data.azurerm_subnet.aks-00-mgmt.id,
+    data.azurerm_subnet.aks-01-mgmt.id,
+    data.azurerm_subnet.aks-00-infra.id,
+    data.azurerm_subnet.aks-01-infra.id,
+    data.azurerm_subnet.aks-00-aat.id,
+    data.azurerm_subnet.aks-01-aat.id]
 
-  cft_aat_subnets = var.env == "aat" ? [data.azurerm_subnet.aat_aks_00_subnet.id, data.azurerm_subnet.aat_aks_01_subnet.id] : []
+  sa_prod_subnets = [
+    data.azurerm_subnet.jenkins_subnet.id,
+    data.azurerm_subnet.aks-00-mgmt.id,
+    data.azurerm_subnet.aks-01-mgmt.id,
+    data.azurerm_subnet.aks-00-infra.id,
+    data.azurerm_subnet.aks-01-infra.id,
+    data.azurerm_subnet.aks-00-prod.id,
+    data.azurerm_subnet.aks-01-prod.id]
 
-  all_valid_subnets = concat(local.valid_subnets, local.cft_aat_subnets)
+  sa_other_subnets = [
+    data.azurerm_subnet.jenkins_subnet.id,
+    data.azurerm_subnet.aks-00-mgmt.id,
+    data.azurerm_subnet.aks-01-mgmt.id,
+    data.azurerm_subnet.aks-00-infra.id,
+    data.azurerm_subnet.aks-01-infra.id]
+
+  sa_subnets = split(",", var.env == "aat" ? join(",", local.sa_aat_subnets) : join(",", local.sa_other_subnets) || var.env == "aat" ? join(",", local.sa_aat_subnets): join(",", local.sa_other_subnets))
 }
 
 provider "azurerm" {
   alias           = "aks_aat"
   subscription_id = "96c274ce-846d-4e48-89a7-d528432298a7"
+  features {}
+}
+
+provider "azurerm" {
+  alias           = "aks-prod"
+  subscription_id = "8cbc6f36-7c56-4963-9d36-739db5d00b27"
   features {}
 }
 
@@ -37,6 +60,26 @@ provider "azurerm" {
   skip_provider_registration = true
   subscription_id            = "1baf5470-1c3e-40d3-a6f7-74bfbce4b348"
   features {}
+}
+
+data "azurerm_virtual_network" "aks_prod_vnet" {
+  provider            = azurerm.aks-prod
+  name                = "cft-prod-vnet"
+  resource_group_name = "cft-prod-network-rg"
+}
+
+data "azurerm_subnet" "aks-00-prod" {
+  provider             = azurerm.aks-prod
+  name                 = "aks-00"
+  virtual_network_name = data.azurerm_virtual_network.aks_prod_vnet.name
+  resource_group_name  = data.azurerm_virtual_network.aks_prod_vnet.resource_group_name
+}
+
+data "azurerm_subnet" "aks-01-prod" {
+  provider             = azurerm.aks-prod
+  name                 = "aks-01"
+  virtual_network_name = data.azurerm_virtual_network.aks_prod_vnet.name
+  resource_group_name  = data.azurerm_virtual_network.aks_prod_vnet.resource_group_name
 }
 
 data "azurerm_subnet" "aat_aks_00_subnet" {
