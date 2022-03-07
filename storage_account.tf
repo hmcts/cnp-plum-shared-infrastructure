@@ -9,29 +9,19 @@ locals {
   aks_core_vnet_rg = var.env == "preview" ? join("-", ["cft", var.env, "network-rg"]) : join("-", ["aks-infra", var.env, "rg"])
 
   sa_aat_subnets = [
-    data.azurerm_subnet.jenkins_subnet.id,
-    data.azurerm_subnet.aks-00-mgmt.id,
-    data.azurerm_subnet.aks-01-mgmt.id,
-    data.azurerm_subnet.aks-00-infra.id,
-    data.azurerm_subnet.aks-01-infra.id,
+    //data.azurerm_subnet.jenkins_subnet.id,
+    data.azurerm_subnet.aks-mgmt.id,
     data.azurerm_subnet.aks-00-aat.id,
     data.azurerm_subnet.aks-01-aat.id]
 
   sa_prod_subnets = [
-    data.azurerm_subnet.jenkins_subnet.id,
-    data.azurerm_subnet.aks-00-mgmt.id,
-    data.azurerm_subnet.aks-01-mgmt.id,
-    data.azurerm_subnet.aks-00-infra.id,
-    data.azurerm_subnet.aks-01-infra.id,
+    data.azurerm_subnet.aks-mgmt.id,
     data.azurerm_subnet.aks-00-prod.id,
     data.azurerm_subnet.aks-01-prod.id]
 
   sa_other_subnets = [
     data.azurerm_subnet.jenkins_subnet.id,
-    data.azurerm_subnet.aks-00-mgmt.id,
-    data.azurerm_subnet.aks-01-mgmt.id,
-    data.azurerm_subnet.aks-00-infra.id,
-    data.azurerm_subnet.aks-01-infra.id]
+    data.azurerm_subnet.aks-mgmt.id]
 
   sa_subnets = split(",", var.env == "aat" ? join(",", local.sa_aat_subnets) : join(",", local.sa_other_subnets) || var.env == "aat" ? join(",", local.sa_aat_subnets): join(",", local.sa_other_subnets))
 }
