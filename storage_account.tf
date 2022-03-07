@@ -130,6 +130,6 @@ module "storage_account" {
   // Tags
   common_tags  = local.tags
 
-  sa_subnets = local.all_valid_subnets
+  sa_subnets = local.sa_subnets
 
 }
