@@ -147,7 +147,7 @@ data "azurerm_subnet" "aks-01-prod" {
 
 provider "azurerm" {
   alias           = "aks-infra"
-  subscription_id = var.aks_infra_subscription_id
+  subscription_id = "96c274ce-846d-4e48-89a7-d528432298a7"
   features {}
   skip_provider_registration = true
 }
