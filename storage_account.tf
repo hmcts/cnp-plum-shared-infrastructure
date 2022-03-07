@@ -14,7 +14,7 @@ locals {
     data.azurerm_subnet.jenkins_subnet.id,
   ]
 
-  cft_prod_subnets = var.env == "aat" ? [data.azurerm_subnet.aat_aks_00_subnet.id, data.azurerm_subnet.aat_aks_01_subnet.id] : []
+  cft_aat_subnets = var.env == "aat" ? [data.azurerm_subnet.aat_aks_00_subnet.id, data.azurerm_subnet.aat_aks_01_subnet.id] : []
 
   all_valid_subnets = concat(local.valid_subnets, local.cft_aat_subnets)
 }
