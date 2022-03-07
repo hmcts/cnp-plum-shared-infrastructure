@@ -5,8 +5,8 @@ locals {
   aat_vnet_name           = "cft-aat-vnet"
   aat_vnet_resource_group = "cft-aat-network-rg"
 
-  aks_core_vnet = var.env == "preview" ? join("-", ["cft", var.env, "vnet"]) : join("-", ["core", var.env, "vnet"])
-  aks_core_vnet_rg = var.env == "preview" ? join("-", ["cft", var.env, "network-rg"]) : join("-", ["aks-infra", var.env, "rg"])
+  vnet_name = var.env == "sbox" || var.env == "perftest" || var.env == "ithc" || var.env == "preview" ? "cft-${var.env}-vnet" : "core-${var.env}-vnet"
+  vnet_resource_group_name = var.env == "sbox" || var.env == "perftest" || var.env == "ithc" || var.env == "preview" ? "cft-${var.env}-network-rg" : "aks-infra-${var.env}-rg"
 
   sa_aat_subnets = [
     data.azurerm_subnet.aks-00-aat.id,
