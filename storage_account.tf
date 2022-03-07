@@ -89,7 +89,7 @@ data "azurerm_subnet" "aks_01" {
 module "storage_account" {
   source                   = "git@github.com:hmcts/cnp-module-storage-account?ref=master"
   env                      = var.env
-  storage_account_name     = "plum-sa-test"
+  storage_account_name     = "plumtestaat"
   resource_group_name      = azurerm_resource_group.shared_resource_group.name
   location                 = var.location
   account_kind             = "StorageV2"
