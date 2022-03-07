@@ -144,3 +144,28 @@ data "azurerm_subnet" "aks-01-prod" {
   virtual_network_name = data.azurerm_virtual_network.aks_prod_vnet.name
   resource_group_name  = data.azurerm_virtual_network.aks_prod_vnet.resource_group_name
 }
+
+provider "azurerm" {
+  alias           = "aks-infra"
+  subscription_id = var.aks_infra_subscription_id
+  features {}
+  skip_provider_registration = true
+}
+
+provider "azurerm" {
+  alias           = "aks-preview"
+  subscription_id = var.aks_preview_subscription_id
+  features {}
+}
+
+provider "azurerm" {
+  alias           = "mgmt"
+  subscription_id = var.mgmt_subscription_id
+  features {}
+}
+
+provider "azurerm" {
+  alias           = "aks-prod"
+  subscription_id = "8cbc6f36-7c56-4963-9d36-739db5d00b27"
+  features {}
+}
