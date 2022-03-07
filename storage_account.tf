@@ -69,14 +69,14 @@ data "azurerm_subnet" "aks-01-prod" {
   resource_group_name  = data.azurerm_virtual_network.aks_prod_vnet.resource_group_name
 }
 
-data "azurerm_subnet" "aat_aks_00_subnet" {
+data "azurerm_subnet" "aks-00-aat" {
   provider             = azurerm.aks_aat
   name                 = "aks-00"
   virtual_network_name = local.aat_vnet_name
   resource_group_name  = local.aat_vnet_resource_group
 }
 
-data "azurerm_subnet" "aat_aks_01_subnet" {
+data "azurerm_subnet" "aks-01-aat" {
   provider             = azurerm.aks_aat
   name                 = "aks-01"
   virtual_network_name = local.aat_vnet_name
