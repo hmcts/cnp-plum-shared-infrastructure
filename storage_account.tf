@@ -22,28 +22,6 @@ locals {
 
 }
 
-// pcq blob Storage Account
-module "pcq_storage_account" {
-  source                   = "git@github.com:hmcts/cnp-module-storage-account?ref=master"
-  env                      = var.env
-  storage_account_name     = "plumtestaat"
-  resource_group_name      = azurerm_resource_group.shared_resource_group.name
-  location                 = var.location
-  account_kind             = "StorageV2"
-  account_tier             = "Standard"
-  account_replication_type = "LRS"
-  access_tier              = "Hot"
-  enable_https_traffic_only = true
-
-  // enable_blob_encryption    = true
-  // enable_file_encryption    = true
-  // Tags
-  common_tags               = var.common_tags
-
-  sa_subnets = local.sa_subnets
-}
-////////////////////////////////////////////////
-
 data "azurerm_subnet" "aat_aks_00_subnet" {
   provider             = azurerm.aks-aat
   name                 = "aks-00"
