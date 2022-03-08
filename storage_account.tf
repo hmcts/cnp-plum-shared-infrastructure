@@ -9,16 +9,16 @@ locals {
   vnet_name = var.env == "sbox" || var.env == "perftest" || var.env == "ithc" || var.env == "preview" ? "cft-${var.env}-vnet" : "core-${var.env}-vnet"
   vnet_resource_group_name = var.env == "sbox" || var.env == "perftest" || var.env == "ithc" || var.env == "preview" ? "cft-${var.env}-network-rg" : "aks-infra-${var.env}-rg"
 
-  standard_subnets = [
-    data.azurerm_subnet.jenkins_subnet.id,
-    data.azurerm_subnet.aks-00-mgmt.id,
-    data.azurerm_subnet.aks-01-mgmt.id,
-    data.azurerm_subnet.aks-00-infra.id,
-    data.azurerm_subnet.aks-01-infra.id]
+  # standard_subnets = [
+  #   data.azurerm_subnet.jenkins_subnet.id,
+  #   data.azurerm_subnet.aks-00-mgmt.id,
+  #   data.azurerm_subnet.aks-01-mgmt.id,
+  #   data.azurerm_subnet.aks-00-infra.id,
+  #   data.azurerm_subnet.aks-01-infra.id]
 
-  preview_subnets  = var.env == "prod" ? [data.azurerm_subnet.aks-00-preview.id, data.azurerm_subnet.aks-00-preview.id] : []
-  cft_aat_subnets = var.env == "aat" ? [data.azurerm_subnet.aat_aks_00_subnet.id, data.azurerm_subnet.aat_aks_01_subnet.id, data.azurerm_subnet.aks-00-preview.id, data.azurerm_subnet.aks-00-preview.id] : []
-  sa_subnets    = concat(local.standard_subnets, local.preview_subnets, local.cft_aat_subnets)
+  # preview_subnets  = var.env == "prod" ? [data.azurerm_subnet.aks-00-preview.id, data.azurerm_subnet.aks-00-preview.id] : []
+  # cft_aat_subnets = var.env == "aat" ? [data.azurerm_subnet.aat_aks_00_subnet.id, data.azurerm_subnet.aat_aks_01_subnet.id, data.azurerm_subnet.aks-00-preview.id, data.azurerm_subnet.aks-00-preview.id] : []
+  # sa_subnets    = concat(local.standard_subnets, local.preview_subnets, local.cft_aat_subnets)
 
 }
 
