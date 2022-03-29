@@ -78,3 +78,5 @@ variable "common_tags" {
 variable "managed_identity_object_id" {
   default = ""
 }
+
+variable "aks_subscription_id" {}
