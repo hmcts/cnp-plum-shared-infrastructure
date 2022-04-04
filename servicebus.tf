@@ -4,6 +4,7 @@ variable "project" {
 
 locals {
   servicebus_namespace_name = "${var.product}-servicebus-${var.env}"
+  env = var.env == "sandbox" ? "sbox" : var.env
 }
 
 module "servicebus-namespace" {
@@ -11,7 +12,7 @@ module "servicebus-namespace" {
   name                    = local.servicebus_namespace_name
   location                = var.location
   resource_group_name     = azurerm_resource_group.shared_resource_group.name
-  env                     = var.env
+  env                     = local.env
   common_tags             = var.common_tags
   project                 = var.project
   capacity                = 1
