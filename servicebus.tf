@@ -20,4 +20,5 @@ module "servicebus-namespace" {
 #   project                 = var.project
 #   capacity                = 1
 #   enable_private_endpoint = true
+  private_endpoint_subscription_id = var.aks_subscription_id
 }
