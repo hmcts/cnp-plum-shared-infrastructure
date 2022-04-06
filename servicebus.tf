@@ -4,7 +4,6 @@ variable "project" {
 
 locals {
   servicebus_namespace_name = "${var.product}-servicebus-${var.env}"
-#   env                       = var.env == "sandbox" ? "sbox" : var.env
 }
 
 module "servicebus-namespace" {
