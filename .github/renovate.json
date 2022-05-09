@@ -1,0 +1,12 @@
+11 lines(11 sloc) 283 Bytes
+
+{
+    "enabledManagers": ["helm-requirements", "gradle-wrapper", "terraform-module", "terraform-provider"],
+    "labels": ["dependencies"],
+    "helm-requirements": {
+        "fileMatch": ["\\Chart.yaml|requirements.yaml$"],
+        "aliases": {
+            "hmctspublic": "https://hmctspublic.azurecr.io/helm/v1/repo/"
+        }
+    }
+}
