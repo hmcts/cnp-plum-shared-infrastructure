@@ -3,7 +3,7 @@ resource "azurerm_application_insights" "appinsights" {
   location            = var.appinsights_location
   resource_group_name = azurerm_resource_group.shared_resource_group.name
   application_type    = var.application_type
-  tags                = {
+  tags = {
     Wrong = "Example"
   }
 
