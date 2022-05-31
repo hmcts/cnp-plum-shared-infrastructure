@@ -3,10 +3,7 @@ resource "azurerm_application_insights" "appinsights" {
   location            = var.appinsights_location
   resource_group_name = azurerm_resource_group.shared_resource_group.name
   application_type    = var.application_type
-  tags = {
-    Wrong = "Example"
-  }
-
+  tags                = local.tags
   lifecycle {
     ignore_changes = [
       # Ignore changes to appinsights as otherwise upgrading to the Azure provider 2.x
