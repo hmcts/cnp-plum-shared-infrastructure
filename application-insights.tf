@@ -4,7 +4,7 @@ resource "azurerm_application_insights" "appinsights" {
   resource_group_name = azurerm_resource_group.shared_resource_group.name
   application_type    = var.application_type
   tags                = {
-    Wrong = Example
+    Wrong = "Example"
   }
 
   lifecycle {
