@@ -1,5 +1,6 @@
 locals {
-  servicebus_namespace_name = "${var.product}-servicebus-${var.env}"
+  env = var.env == sandbox ? sbox : var.env
+  servicebus_namespace_name = "${var.product}-servicebus-${local.env}"
 }
 
 module "servicebus-namespace" {
@@ -22,8 +23,8 @@ resource "azurerm_servicebus_queue" "this" {
 }
 
 data "azurerm_user_assigned_identity" "plum" {
-  name                = "plum-${var.env}-mi"
-  resource_group_name = "managed-identities-${var.env}-rg"
+  name                = "plum-${local.env}-mi"
+  resource_group_name = "managed-identities-${local.env}-rg"
 }
 
 resource "azurerm_role_assignment" "plum_servicebus_data_receiver" {
@@ -33,7 +34,7 @@ resource "azurerm_role_assignment" "plum_servicebus_data_receiver" {
 }
 
 data "azurerm_user_assigned_identity" "keda" {
-  name                = "keda-${var.env}-mi"
+  name                = "keda-${local.env}-mi"
   resource_group_name = "managed-identities-${var.env}-rg"
 }
 
