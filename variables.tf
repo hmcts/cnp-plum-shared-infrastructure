@@ -7,6 +7,11 @@ variable "product" {
   default     = "plum"
 }
 
+variable "project" {
+  default     = "cft"
+  description = "Project name"
+}
+
 variable "env" {
   description = "The deployment environment (sandbox, aat, prod etc..)"
 }
