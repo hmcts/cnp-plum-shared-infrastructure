@@ -54,3 +54,4 @@ resource "azurerm_role_assignment" "platops_servicebus_data_owner" {
   scope                = module.servicebus-namespace.id
   role_definition_name = "Azure Service Bus Data Owner"
 }
+
