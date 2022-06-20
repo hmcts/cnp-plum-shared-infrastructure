@@ -1,5 +1,5 @@
 locals {
-  env = var.env == sandbox ? "sbox" : var.env
+  env = var.env == "sandbox" ? "sbox" : var.env
   servicebus_namespace_name = "${var.product}-servicebus-${local.env}"
 }
 
