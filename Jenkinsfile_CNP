@@ -3,7 +3,7 @@
 @Library("Infrastructure") _
 
 def product = "plum"
-def branchesToSync = ['ithc', 'perftest', 'demo']
+def branchesToSync = ['ithc', 'perftest', 'demo', 'prod']
 
 withInfraPipeline(product) {
   syncBranchesWithMaster(branchesToSync)
