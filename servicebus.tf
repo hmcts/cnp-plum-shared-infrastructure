@@ -21,13 +21,8 @@ resource "azurerm_servicebus_queue" "this" {
   namespace_id = module.servicebus-namespace.id
 }
 
-data "azurerm_user_assigned_identity" "plum" {
-  name                = "plum-${var.env}-mi"
-  resource_group_name = "managed-identities-${var.env}-rg"
-}
-
 resource "azurerm_role_assignment" "plum_servicebus_data_receiver" {
-  principal_id = data.azurerm_user_assigned_identity.plum.principal_id
+  principal_id = module.vault.managed_identity_objectid[0]
   scope        = module.servicebus-namespace.id
   role_definition_name = "Azure Service Bus Data Receiver"
 }
