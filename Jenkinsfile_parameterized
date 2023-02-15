@@ -11,6 +11,7 @@ properties([
     ])
 ])
 
+def expiresAfter = "3000-01-01"
 
 productName = params.PRODUCT_NAME
 subscription = params.SUBSCRIPTION
@@ -19,4 +20,5 @@ environment = params.ENVIRONMENT
 echo "Building '${productName}' in '${environment}'"
 
 withParameterizedInfraPipeline(productName, environment, subscription) {
+    expires(expiresAfter)
 }

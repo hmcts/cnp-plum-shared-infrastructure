@@ -10,7 +10,8 @@ properties([
 library "Infrastructure@${params.LIB_VERSION}"
 
 def product = "crumble"
+def expiresAfter = "3000-01-01"
 
 withInfraPipeline(product) {
-  
+  expires(expiresAfter)
 }
