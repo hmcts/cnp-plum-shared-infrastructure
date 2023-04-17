@@ -1,9 +1,10 @@
 //KEY VAULT RESOURCE
 
 module "vault" {
-  source                      = "git@github.com:hmcts/cnp-module-key-vault?ref=master"
+  source                      = "git@github.com:hmcts/cnp-module-key-vault?ref=DTSPO-12662-workload-identity-fed-creds"
   name                        = local.vault_name
   product                     = var.product
+  namespace                   = "cnp"
   env                         = var.env
   tenant_id                   = var.tenant_id
   object_id                   = var.jenkins_AAD_objectId

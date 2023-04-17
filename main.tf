@@ -1,7 +1,3 @@
-provider "azurerm" {
-  features {}
-}
-
 locals {
   vault_name = "${var.product}si-${var.env}"
   
