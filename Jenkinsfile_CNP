@@ -1,6 +1,6 @@
 #!groovy
 //noinspection GroovyUnusedAssignment
-@Library("Infrastructure@DTSPO-13916-TERRAFORM-FORMAT-IMPLEMENTATION") _ 
+@Library("Infrastructure@DTSPO-13916-TERRAFORM-FORMAT-IMPLEMENTATION") _  
 
 def product = "plum"
 def branchesToSync = ['ithc', 'perftest', 'demo']
