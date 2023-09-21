@@ -85,3 +85,12 @@ variable "managed_identity_object_id" {
 }
 
 variable "aks_subscription_id" {}
+
+variable "create_chart_tests_mi" {
+  default = false
+}
+
+variable "additional_managed_identities_access" {
+  type    = list(string)
+  default = []
+}
