@@ -19,11 +19,11 @@ module "servicebus-namespace" {
 
 resource "azurerm_servicebus_queue" "this" {
   name         = "recipes"
-       namespace_id = module.servicebus-namespace.id
+       namespace_id =  module.servicebus-namespace.id
 }
 
 resource "azurerm_role_assignment" "plum_servicebus_data_receiver" {
-  principal_id = module.vault.managed_identity_objectid[0]
+   principal_id = module.vault.managed_identity_objectid[0]
   scope        = module.servicebus-namespace.id
 
          role_definition_name           = "Azure Service Bus Data Receiver"
