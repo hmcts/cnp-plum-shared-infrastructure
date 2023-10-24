@@ -8,10 +8,10 @@ module "servicebus-namespace" {
 
   }
   source              = "git@github.com:hmcts/terraform-module-servicebus-namespace?ref=master"
-    name                = local.servicebus_namespace_name
-  location            = var.location
+  name                = local.servicebus_namespace_name
+   location            = var.location
   sku                 = "Basic"
-  resource_group_name = azurerm_resource_group.shared_resource_group.name
+  resource_group_name  = azurerm_resource_group.shared_resource_group.name
   env                 =    var.env
   common_tags         = var.common_tags
   project             = var.project
@@ -19,13 +19,13 @@ module "servicebus-namespace" {
 
 resource "azurerm_servicebus_queue" "this" {
   name         = "recipes"
-      namespace_id =  module.servicebus-namespace.id
+   namespace_id =  module.servicebus-namespace.id
 }
 
 resource "azurerm_role_assignment" "plum_servicebus_data_receiver" {
    principal_id = module.vault.managed_identity_objectid[0]
    scope        = module.servicebus-namespace.id
-         role_definition_name     = "Azure Service Bus Data Receiver"
+    role_definition_name     =  "Azure Service Bus Data Receiver"
 }
 
 data "azurerm_user_assigned_identity" "keda" {
