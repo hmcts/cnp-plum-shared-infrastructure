@@ -19,7 +19,7 @@ module "servicebus-namespace" {
 
 resource "azurerm_servicebus_queue" "this" {
   name         = "recipes"
-       namespace_id =  module.servicebus-namespace.id
+      namespace_id =  module.servicebus-namespace.id
 }
 
 resource "azurerm_role_assignment" "plum_servicebus_data_receiver" {
