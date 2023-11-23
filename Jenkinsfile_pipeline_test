@@ -9,7 +9,7 @@ properties([
 
 library "Infrastructure@${params.LIB_VERSION}"
 
-def product = "crumble"
+def product = "plum"
 
 withInfraPipeline(product) {
   
