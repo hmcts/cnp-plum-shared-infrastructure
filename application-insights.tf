@@ -15,11 +15,6 @@ moved {
   to   = module.application_insights.azurerm_application_insights.this
 }
 
-output "appInsightsInstrumentationKey" {
-  value     = azurerm_application_insights.appinsights.instrumentation_key
-  sensitive = true
-}
-
 resource "azurerm_key_vault_secret" "appInsights-InstrumentationKey" {
   name         = "appInsights-InstrumentationKey"
   value        = module.application_insights.instrumentation_key
