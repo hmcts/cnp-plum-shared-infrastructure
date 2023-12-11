@@ -3,7 +3,7 @@ module "application_insights" {
 
   env     = var.env
   product = var.product
-  name    = "${var.product}-${var.component}"
+  name    = "${var.product}-${var.env}"
 
   resource_group_name = azurerm_resource_group.shared_resource_group.name
 
