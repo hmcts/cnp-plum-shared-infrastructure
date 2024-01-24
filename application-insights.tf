@@ -1,3 +1,29 @@
+data "azurerm_windows_function_app" "alerts" {
+  name                = "alerts-slack-${var.env}"
+  resource_group_name = "alerts-slack-${var.env}"
+}
+
+data "azurerm_function_app_host_keys" "host_keys" {
+  name                = data.azurerm_windows_function_app.alerts.name
+  resource_group_name = "alerts-slack-${var.env}"
+}
+
+resource "azurerm_monitor_action_group" "action_group" {
+  name                = "AI-Example-Warning-Alerts"
+  resource_group_name = azurerm_resource_group.shared_resource_group.name
+  short_name          = "${var.product}-${var.env}"
+
+  azure_function_receiver {
+    function_app_resource_id = data.azurerm_windows_function_app.alerts.id
+    function_name            = "httpTrigger"
+    http_trigger_url         = "https://${data.azurerm_windows_function_app.alerts.default_hostname}/api/httpTrigger?code=${data.azurerm_function_app_host_keys.host_keys.primary_key}"
+    name                     = "slack-alerts"
+    use_common_alert_schema  = true
+  }
+
+  tags = module.tags.common_tags
+}
+
 module "application_insights" {
   source = "git@github.com:hmcts/terraform-module-application-insights?ref=alert"
 
@@ -10,6 +36,8 @@ module "application_insights" {
   common_tags = var.common_tags
 
   daily_data_cap_in_gb = var.daily_data_cap_in_gb
+
+  action_group_id = azurerm_monitor_action_group.action_group.id
 
 }
 
