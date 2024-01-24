@@ -21,7 +21,7 @@ resource "azurerm_monitor_action_group" "action_group" {
     use_common_alert_schema  = true
   }
 
-  tags = module.tags.common_tags
+  tags =  var.common_tags
 }
 
 module "application_insights" {
