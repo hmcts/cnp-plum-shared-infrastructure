@@ -1,11 +1,11 @@
 data "azurerm_windows_function_app" "alerts" {
-  name                = "alerts-slack-${var.env}"
-  resource_group_name = "alerts-slack-${var.env}"
+  name                = var.env == "aat" ? "alerts-slack-stg" : "alerts-slack-${var.env}"
+  resource_group_name = var.env == "aat" ? "alerts-slack-stg" : "alerts-slack-${var.env}"
 }
 
 data "azurerm_function_app_host_keys" "host_keys" {
   name                = data.azurerm_windows_function_app.alerts.name
-  resource_group_name = "alerts-slack-${var.env}"
+  resource_group_name = var.env == "aat" ? "alerts-slack-stg" : "alerts-slack-${var.env}"
 }
 
 resource "azurerm_monitor_action_group" "action_group" {
