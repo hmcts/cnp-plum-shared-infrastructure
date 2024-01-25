@@ -1,9 +1,11 @@
 data "azurerm_windows_function_app" "alerts" {
+  provider            = azurerm.private_endpoint
   name                = var.env == "aat" ? "alerts-slack-stg" : "alerts-slack-${var.env}"
   resource_group_name = var.env == "aat" ? "alerts-slack-stg" : "alerts-slack-${var.env}"
 }
 
 data "azurerm_function_app_host_keys" "host_keys" {
+  provider            = azurerm.private_endpoint
   name                = data.azurerm_windows_function_app.alerts.name
   resource_group_name = var.env == "aat" ? "alerts-slack-stg" : "alerts-slack-${var.env}"
 }
@@ -21,7 +23,7 @@ resource "azurerm_monitor_action_group" "action_group" {
     use_common_alert_schema  = true
   }
 
-  tags =  var.common_tags
+  tags = var.common_tags
 }
 
 module "application_insights" {
@@ -29,7 +31,7 @@ module "application_insights" {
 
   env     = var.env
   product = var.product
-  name    = "${var.product}"
+  name    = var.product
 
   resource_group_name = azurerm_resource_group.shared_resource_group.name
 
