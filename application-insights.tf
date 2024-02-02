@@ -17,7 +17,7 @@ data "azurerm_function_app_host_keys" "host_keys" {
 resource "azurerm_monitor_action_group" "action_group" {
   name                = "${title(var.product)}-${title(var.env)}-Warning-Alerts"
   resource_group_name = azurerm_resource_group.shared_resource_group.name
-  short_name          = "${var.product}-${var.env}"
+  short_name          = "${var.product}-${local.env}"
 
   azure_function_receiver {
     function_app_resource_id = data.azurerm_windows_function_app.alerts.id
