@@ -41,6 +41,15 @@ module "application_insights" {
 
   action_group_id = azurerm_monitor_action_group.action_group.id
 
+  additional_action_group_ids = [
+    {
+      ag_name                = "test-AG"
+      ag_short_name          = "otag"
+      email_receiver_name    = "Tyler"
+      email_receiver_address = "tyler.mcdowell@justice.gov.uk"
+      resourcegroup_name     = azurerm_resource_group.shared_resource_group.name
+    }
+  ]
 }
 
 moved {
