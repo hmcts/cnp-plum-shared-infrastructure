@@ -23,11 +23,19 @@ resource "azurerm_monitor_action_group" "action_group" {
     use_common_alert_schema  = true
   }
 
+  dynamic "email_receiver" {
+    for_each = var.email_receiver_config != null ? [var.email_receiver_config] : []
+    content {
+      name          = email_receiver.value["name"]
+      email_address = email_receiver.value["email_address"]
+    }
+  }
+
   tags = var.common_tags
-}
+} 
 
 module "application_insights" {
-  source = "git@github.com:hmcts/terraform-module-application-insights?ref=alert"
+  source = "git@github.com:hmcts/terraform-module-application-insights?ref=DTSPO-14997-enable-teams-to-add-more-action-groups1"
 
   env     = var.env
   product = var.product
@@ -45,8 +53,8 @@ module "application_insights" {
     {
       ag_name                = "test-AG"
       ag_short_name          = "otag"
-      email_receiver_name    = "Tyler"
-      email_receiver_address = "tyler.mcdowell@justice.gov.uk"
+      email_receiver_name    = "bob"
+      email_receiver_address = "test@email"
       resourcegroup_name     = azurerm_resource_group.shared_resource_group.name
     }
   ]

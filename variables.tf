@@ -99,3 +99,12 @@ variable "daily_data_cap_in_gb" {
   description = "Specifies the Application Insights component daily data volume cap in GB"
   default     = 100
 }
+
+variable "email_receiver_config" {
+  description = "Configuration for email receiver in the action group"
+  type        = map(string)
+  default     = {
+      name          = "test"
+      email_address = "test@justice.gov.uk"
+  }
+}
