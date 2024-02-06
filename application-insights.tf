@@ -4,25 +4,25 @@ locals {
 
 data "azurerm_windows_function_app" "alerts" {
   provider            = azurerm.private_endpoint
-  name                = "alerts-slack-${var.env}"
-  resource_group_name = "alerts-slack-${var.env}"
+  name                = "alerts-slack-${local.env}"
+  resource_group_name = "alerts-slack-${local.env}"
 }
 
 data "azurerm_function_app_host_keys" "host_keys" {
   provider            = azurerm.private_endpoint
   name                = data.azurerm_windows_function_app.alerts.name
-  resource_group_name = "alerts-slack-${var.env}"
+  resource_group_name = "alerts-slack-${local.env}"
 }
 
 resource "azurerm_monitor_action_group" "action_group" {
   name                = "${title(var.product)}-${title(var.env)}-Warning-Alerts"
   resource_group_name = azurerm_resource_group.shared_resource_group.name
-  short_name          = "${var.product}-${var.env}"
+  short_name          = "${var.product}-${local.env}"
 
   azure_function_receiver {
     function_app_resource_id = data.azurerm_windows_function_app.alerts.id
     function_name            = "httpTrigger"
-    http_trigger_url         = "https://${data.azurerm_windows_function_app.alerts.default_hostname}/api/httpTrigger?code=${data.azurerm_function_app_host_keys.host_keys.primary_key}"
+    http_trigger_url         = "https://${data.azurerm_windows_function_app.alerts.default_hostname}/api/httpTrigger?code=${data.azurerm_function_app_host_keys.host_keys.default_function_key}"
     name                     = "slack-alerts"
     use_common_alert_schema  = true
   }
