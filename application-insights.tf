@@ -35,7 +35,7 @@ resource "azurerm_monitor_action_group" "action_group" {
 } 
 
 module "application_insights" {
-  source = "git@github.com:hmcts/terraform-module-application-insights?ref=DTSPO-14997-enable-teams-to-add-more-action-groups1"
+  source = "git@github.com:hmcts/terraform-module-application-insights?ref=alert"
 
   env     = var.env
   product = var.product
