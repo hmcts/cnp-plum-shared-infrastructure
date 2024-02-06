@@ -48,16 +48,6 @@ module "application_insights" {
   daily_data_cap_in_gb = var.daily_data_cap_in_gb
 
   action_group_id = azurerm_monitor_action_group.action_group.id
-
-  additional_action_group_ids = [
-    {
-      ag_name                = "test-AG"
-      ag_short_name          = "otag"
-      email_receiver_name    = "bob"
-      email_receiver_address = "test@email"
-      resourcegroup_name     = azurerm_resource_group.shared_resource_group.name
-    }
-  ]
 }
 
 moved {
