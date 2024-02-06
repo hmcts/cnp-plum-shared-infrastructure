@@ -105,6 +105,6 @@ variable "email_receiver_config" {
   type        = map(string)
   default     = {
       name          = "test"
-      email_address = "test@justice.gov.uk"
+      email_address = "tyler.mcdowell@justice.gov.uk"
   }
 }

@@ -1,3 +1,7 @@
+locals {
+  env = var.env == "sandbox" ? "sbox" : var.env
+}
+
 data "azurerm_windows_function_app" "alerts" {
   provider            = azurerm.private_endpoint
   name                = "alerts-slack-${var.env}"
