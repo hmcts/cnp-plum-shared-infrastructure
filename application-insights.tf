@@ -42,9 +42,6 @@ module "application_insights" {
   common_tags = var.common_tags
 
   daily_data_cap_in_gb = var.daily_data_cap_in_gb
-
-  action_group_id = azurerm_monitor_action_group.action_group.id
-
 }
 
 moved {
