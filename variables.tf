@@ -4,7 +4,7 @@ variable "subscription" {}
 
 variable "product" {
   description = "The name of your application"
-  default     = "plum"
+  default     = "plum_test01"
 }
 
 variable "project" {
