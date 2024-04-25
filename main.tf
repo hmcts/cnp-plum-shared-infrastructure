@@ -20,4 +20,12 @@ resource "azurerm_resource_group" "shared_resource_group" {
   tags = local.tags
 }
 
+resource "azurerm_resource_group" "shared_resource_group_2" {
+  name     = "${var.product}-shared-infrastructure-${var.env}-2"
+  location = var.location
+
+  tags = local.tags
+}
+
+
 
