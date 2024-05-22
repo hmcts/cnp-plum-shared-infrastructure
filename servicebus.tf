@@ -1,8 +1,8 @@
 locals {
-  servicebus_namespace_name = "${var.product}-servicebus-${var.env}"
+   servicebus_namespace_name = "${var.product}-servicebus-${var.env}"
 }
 
-module "servicebus-namespace" {
+ module "servicebus-namespace" {
   providers = {
     azurerm.private_endpoint = azurerm.private_endpoint
   }
@@ -17,7 +17,7 @@ module "servicebus-namespace" {
 }
 
 resource "azurerm_servicebus_queue" "this" {
-  name         = "recipes"
+   name         = "recipes"
   namespace_id = module.servicebus-namespace.id
 }
 

@@ -1,6 +1,6 @@
 #!groovy
 //noinspection GroovyUnusedAssignment
-@Library("Infrastructure") _
+@Library("Infrastructure"@DTSPO-13916-TF-FMT-JENKINS) _
 
 def product = "plum"
 def branchesToSync = ['ithc', 'perftest', 'demo']
