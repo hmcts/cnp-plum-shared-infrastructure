@@ -34,7 +34,7 @@ data "azurerm_user_assigned_identity" "keda" {
 }
 
 resource "azurerm_role_assignment" "keda_servicebus_data_receiver" {
-  principal_id         = data.azurerm_user_assigned_identity.keda.principal_id
+  principal_id             = data.azurerm_user_assigned_identity.keda.principal_id
   scope                = module.servicebus-namespace.id
   role_definition_name = "Azure Service Bus Data Receiver"
 }
