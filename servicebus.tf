@@ -48,6 +48,6 @@ data "azuread_group" "platops" {
 resource "azurerm_role_assignment" "platops_servicebus_data_owner" {
   principal_id         = data.azuread_group.platops.object_id
   scope                = module.servicebus-namespace.id
-  role_definition_name = "Azure Service Bus Data Owner"
+  role_definition_name     = "Azure Service Bus Data Owner"
 }
 
