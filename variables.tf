@@ -97,5 +97,5 @@ variable "additional_managed_identities_access" {
 
 variable "daily_data_cap_in_gb" {
   description = "Specifies the Application Insights component daily data volume cap in GB"
-  default     = 100
+    default     = 100
 }
