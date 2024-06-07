@@ -10,20 +10,20 @@ module "servicebus-namespace" {
   name                = local.servicebus_namespace_name
   location            = var.location
   sku                 = "Basic"
-  resource_group_name =             azurerm_resource_group.shared_resource_group.name
+  resource_group_name = azurerm_resource_group.shared_resource_group.name
   env                 = var.env
-  common_tags          = var.common_tags
+  common_tags         = var.common_tags
   project             = var.project
 }
 
 resource "azurerm_servicebus_queue" "this" {
   name         = "recipes"
-       namespace_id = module.servicebus-namespace.id
+  namespace_id = module.servicebus-namespace.id
 }
 
 resource "azurerm_role_assignment" "plum_servicebus_data_receiver" {
   principal_id = module.vault.managed_identity_objectid[0]
-   scope                           = module.servicebus-namespace.id
+  scope        = module.servicebus-namespace.id
 
   role_definition_name = "Azure Service Bus Data Receiver"
 }
@@ -34,7 +34,7 @@ data "azurerm_user_assigned_identity" "keda" {
 }
 
 resource "azurerm_role_assignment" "keda_servicebus_data_receiver" {
-  principal_id             = data.azurerm_user_assigned_identity.keda.principal_id
+  principal_id         = data.azurerm_user_assigned_identity.keda.principal_id
   scope                = module.servicebus-namespace.id
   role_definition_name = "Azure Service Bus Data Receiver"
 }
@@ -48,6 +48,6 @@ data "azuread_group" "platops" {
 resource "azurerm_role_assignment" "platops_servicebus_data_owner" {
   principal_id         = data.azuread_group.platops.object_id
   scope                = module.servicebus-namespace.id
-  role_definition_name     = "Azure Service Bus Data Owner"
+  role_definition_name = "Azure Service Bus Data Owner"
 }
 
