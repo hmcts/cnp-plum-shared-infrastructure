@@ -19,6 +19,7 @@ module "servicebus-namespace" {
 resource "azurerm_servicebus_queue" "this" {
   name         = "recipes"
   namespace_id = module.servicebus-namespace.id
+  default_message_ttl = "P1D" # 1 day
 }
 
 resource "azurerm_role_assignment" "plum_servicebus_data_receiver" {
