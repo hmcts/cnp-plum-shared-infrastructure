@@ -1,5 +1,5 @@
 terraform {
-  # backend "azurerm" {}
+  backend "azurerm" {}
 
   required_providers {
     azurerm = {
@@ -20,5 +20,5 @@ provider "azurerm" {
   features {}
   skip_provider_registration = true
   alias                      = "private_endpoint"
-  # subscription_id            = var.aks_subscription_id
+  subscription_id            = var.aks_subscription_id
 }
