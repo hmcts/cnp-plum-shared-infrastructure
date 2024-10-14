@@ -1,11 +1,11 @@
 terraform {
-  backend "azurerm" {}
+  # backend "azurerm" {}
 
   required_providers {
     azurerm = {
       source  = "hashicorp/azurerm"
-      version = "4.0.1"
-    }
+      version = "4.5.0"
+     }
     random = {
       source = "hashicorp/random"
     }
@@ -20,5 +20,5 @@ provider "azurerm" {
   features {}
   skip_provider_registration = true
   alias                      = "private_endpoint"
-  subscription_id            = var.aks_subscription_id
+  # subscription_id            = var.aks_subscription_id
 }
