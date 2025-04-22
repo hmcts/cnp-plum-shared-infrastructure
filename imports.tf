@@ -14,11 +14,6 @@ import {
 }
 
 import {
-  to = module.vault.azurerm_key_vault_access_policy.managed_identity_access_policy["60ab1441-a8a9-4990-aa30-c94e9f0b047b"]
-  id = "crumblesi-sandbox/objectId/60ab1441-a8a9-4990-aa30-c94e9f0b047b"
-}
-
-import {
   to = module.vault.azurerm_key_vault_access_policy.product_team_access_policy
   id = "crumblesi-sandbox/objectId/e7ea2042-4ced-45dd-8ae3-e051c6551789"
 }
