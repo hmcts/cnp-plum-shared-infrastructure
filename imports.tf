@@ -4,11 +4,6 @@ import {
 }
 
 import {
-  to = module.vault.azurerm_key_vault_access_policy.developer[0]
-  id = "crumblesi-sandbox/objectId/b2a1773c-a5ae-48b5-b5fa-95b0e05eee05"
-}
-
-import {
   to = module.vault.azurerm_key_vault_access_policy.creator_access_policy
   id = "crumblesi-sandbox/objectId/0292f26e-288e-4f5b-85fc-b99a53f0a2b1"
 }
