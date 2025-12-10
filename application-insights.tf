@@ -1,5 +1,5 @@
 module "application_insights" {
-  source = "git@github.com:hmcts/terraform-module-application-insights?ref=4.x"
+  source = "git@github.com:hmcts/terraform-module-application-insights?ref=DTSPO-28826-Reduce-log-analytics-cost-in-nonprod"
 
   env     = var.env
   product = var.product
