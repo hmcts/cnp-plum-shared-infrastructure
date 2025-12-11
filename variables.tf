@@ -92,6 +92,8 @@ variable "create_chart_tests_mi" {
 
 variable "sampling_percentage" {
   description = "Specifies the sampling percentage for Application Insights"
+  default     = null
+  type        = number
 }
 
 variable "additional_managed_identities_access" {
