@@ -1,1 +1,1 @@
-certificate_name="wildcard-ithc-platform-hmcts-net"
+certificate_name = "wildcard-ithc-platform-hmcts-net"

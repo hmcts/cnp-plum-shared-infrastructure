@@ -47,12 +47,12 @@ variable "team_contact" {
 }
 
 variable "certificate_name" {
-  default = "STAR-platform-hmcts-net"
+  default     = "STAR-platform-hmcts-net"
   description = "The certificate name to use in public listeners. Should support the public hostname."
 }
 
 variable "public_hostname" {
-  default = "plum.platform.hmcts.net"
+  default     = "plum.platform.hmcts.net"
   description = "The public hostanme to use when accessing plum's frontend"
 }
 

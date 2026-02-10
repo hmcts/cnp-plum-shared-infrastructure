@@ -4,10 +4,10 @@ provider "azurerm" {
 
 locals {
   vault_name = "${var.product}si-${var.env}"
-  
+
   tags = merge(
     var.common_tags,
-    tomap({"Team Contact" = var.team_contact})
+    tomap({ "Team Contact" = var.team_contact })
   )
 
 }
