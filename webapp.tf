@@ -7,9 +7,9 @@ module "frontend" {
   resource_group_name = azurerm_resource_group.shared_resource_group.name
   os_type             = "linux"
   is_frontend         = true
-  service_plan_id     = ""
+  service_plan_id     = "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/plum-shared-infrastructure-aat/providers/Microsoft.Web/serverFarms/plum-frontend-asp"
 
-  virtual_network_subnet_id = ""
+  virtual_network_subnet_id = "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/aks-infra-cft-aat-rg/providers/Microsoft.Network/virtualNetworks/cft-aat-vnet/subnets/aat"
 
   docker_image_name   = "hello-world:latest"
   docker_registry_url = "https://mcr.microsoft.com"
@@ -33,9 +33,9 @@ module "backend" {
   resource_group_name = azurerm_resource_group.shared_resource_group.name
   os_type             = "linux"
   is_frontend         = false
-  service_plan_id     = ""
+  service_plan_id     = "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/plum-shared-infrastructure-aat/providers/Microsoft.Web/serverFarms/plum-backend-asp"
 
-  virtual_network_subnet_id = ""
+  virtual_network_subnet_id = "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/aks-infra-cft-aat-rg/providers/Microsoft.Network/virtualNetworks/cft-aat-vnet/subnets/aat"
 
   docker_image_name   = "hello-world:latest"
   docker_registry_url = "https://mcr.microsoft.com"
