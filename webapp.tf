@@ -22,6 +22,10 @@ module "frontend" {
     "https://my-product-dev.example.com/",
   ]
 
+  diagnostics_enabled = true
+
+  private_endpoint_enabled   = true
+  private_endpoint_subnet_id = "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/aks-infra-cft-aat-rg/providers/Microsoft.Network/virtualNetworks/cft-aat-vnet/subnets/aat"
 }
 
 module "backend" {
