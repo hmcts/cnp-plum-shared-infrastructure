@@ -22,7 +22,9 @@ module "frontend" {
     "https://my-product-dev.example.com/",
   ]
 
-  diagnostics_enabled = true
+  diagnostics_enabled           = true
+  event_hub_name                = "plum-frontend-eh"
+  eventub_authorization_rule_id = "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/plum-shared-infrastructure-aat/providers/Microsoft.EventHub/namespaces/plum-eh/authorizationRules/plum-eh-auth-rule"
 
   private_endpoint_enabled   = true
   private_endpoint_subnet_id = "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/aks-infra-cft-aat-rg/providers/Microsoft.Network/virtualNetworks/cft-aat-vnet/subnets/aat"
