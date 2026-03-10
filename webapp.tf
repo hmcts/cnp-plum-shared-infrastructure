@@ -8,10 +8,8 @@ module "frontend" {
   os_type             = "linux"
   service_plan_id     = "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/plum-shared-infrastructure-aat/providers/Microsoft.Web/serverFarms/plum-frontend-asp"
 
-  unauthenticated_action            = "RedirectToLoginPage"
-  http2_enabled                     = false
-  health_check_path                 = null
-  health_check_eviction_time_in_min = null
+  unauthenticated_action = "RedirectToLoginPage"
+  http2_enabled          = false
 
   virtual_network_subnet_id = "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/aks-infra-cft-aat-rg/providers/Microsoft.Network/virtualNetworks/cft-aat-vnet/subnets/aat"
 
