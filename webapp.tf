@@ -6,8 +6,12 @@ module "frontend" {
   webapp_name         = "plum-frontend"
   resource_group_name = azurerm_resource_group.shared_resource_group.name
   os_type             = "linux"
-  is_frontend         = true
   service_plan_id     = "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/plum-shared-infrastructure-aat/providers/Microsoft.Web/serverFarms/plum-frontend-asp"
+
+  unauthenticated_action            = "RedirectToLoginPage"
+  http2_enabled                     = false
+  health_check_path                 = null
+  health_check_eviction_time_in_min = null
 
   virtual_network_subnet_id = "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/aks-infra-cft-aat-rg/providers/Microsoft.Network/virtualNetworks/cft-aat-vnet/subnets/aat"
 
@@ -38,8 +42,11 @@ module "backend" {
   webapp_name         = "plum-backend"
   resource_group_name = azurerm_resource_group.shared_resource_group.name
   os_type             = "linux"
-  is_frontend         = false
   service_plan_id     = "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/plum-shared-infrastructure-aat/providers/Microsoft.Web/serverFarms/plum-backend-asp"
+
+  unauthenticated_action            = "Return401"
+  health_check_path                 = "/health"
+  health_check_eviction_time_in_min = 2
 
   virtual_network_subnet_id = "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/aks-infra-cft-aat-rg/providers/Microsoft.Network/virtualNetworks/cft-aat-vnet/subnets/aat"
 
@@ -50,6 +57,11 @@ module "backend" {
   auth_tenant_endpoint = "https://login.microsoftonline.com/${var.tenant_id}/v2.0"
 
   allowed_external_redirect_urls = [
+    "https://my-product-dev.example.com",
+    "https://my-product-dev.example.com/",
+  ]
+
+  cors_allowed_origins = [
     "https://my-product-dev.example.com",
     "https://my-product-dev.example.com/",
   ]
