@@ -13,7 +13,7 @@ module "vault" {
   managed_identity_object_id           = var.managed_identity_object_id
   create_managed_identity              = true
   additional_managed_identities_access = var.additional_managed_identities_access
-  jenkins_object_id                    = var.env != "sandbox" ? data.azurerm_user_assigned_identity.jenkins[0].principal_id : null
+  jenkins_object_id                    = var.env != "sandbox" ? data.azurerm_user_assigned_identity.jenkins[0].principal_id : ""
 }
 
 output "vaultName" {
