@@ -2,6 +2,12 @@ provider "azurerm" {
   features {}
 }
 
+data "azurerm_user_assigned_identity" "jenkins" {
+  count               = var.env != "sandbox" ? 1 : 0
+  name                = "jenkins-${var.env}-mi"
+  resource_group_name = "managed-identities-${var.env}-rg"
+}
+
 locals {
   vault_name = "${var.product}si-${var.env}"
 
