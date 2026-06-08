@@ -3,7 +3,7 @@
 
 properties([
   parameters([
-    string(name: 'LIB_VERSION', defaultValue: 'DTSPO-30107-jenkins-agents', description: 'Branch name of pipeline library to use')
+    string(name: 'LIB_VERSION', defaultValue: 'master', description: 'Branch name of pipeline library to use')
   ])
 ])
 
