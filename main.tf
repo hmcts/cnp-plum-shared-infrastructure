@@ -7,6 +7,12 @@ data "azurerm_user_assigned_identity" "jenkins" {
   resource_group_name = "managed-identities-${var.env}-rg"
 }
 
+data "azurerm_user_assigned_identity" "cftsbox_jenkins" {
+  count               = var.env == "sbox" ? 1 : 0
+  name                = "jenkins-cftsbox-intsvc-mi"
+  resource_group_name = "managed-identities-cftsbox-intsvc-rg"
+}
+
 locals {
   vault_name = "${var.product}si-${var.env}"
 
