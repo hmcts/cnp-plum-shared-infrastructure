@@ -1,7 +1,7 @@
 #!groovy
 import groovy.json.JsonSlurper
 
-@Library('Infrastructure@DTSPO-30107-jenkins-agents') _
+@Library('Infrastructure@2.2.0') _
 
 properties([
     parameters([
