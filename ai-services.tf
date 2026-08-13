@@ -51,3 +51,13 @@ resource "azurerm_role_assignment" "plum_ai_services_openai_user" {
   role_definition_name = "Cognitive Services OpenAI User"
   principal_id         = var.managed_identity_object_id
 }
+
+output "ai_services_cognitive_account_id" {
+  value       = length(module.ai_services) == 0 ? null : module.ai_services[0].cognitive_account_id
+  description = "ID of the plum AI Services cognitive account (sandbox only; null elsewhere)."
+}
+
+output "ai_services_cognitive_account_endpoint" {
+  value       = length(module.ai_services) == 0 ? null : one(module.ai_services[0].cognitive_account_endpoint)
+  description = "Endpoint of the plum AI Services cognitive account (sandbox only; null elsewhere)."
+}
