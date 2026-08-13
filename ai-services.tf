@@ -43,3 +43,11 @@ module "ai_services" {
     }
   }
 }
+
+resource "azurerm_role_assignment" "plum_ai_services_openai_user" {
+  count = var.env == "sandbox" ? 1 : 0
+
+  scope                = module.ai_services[0].cognitive_account_id
+  role_definition_name = "Cognitive Services OpenAI User"
+  principal_id         = var.managed_identity_object_id
+}
