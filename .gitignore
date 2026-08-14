@@ -4,3 +4,5 @@
 *.iml
 .terraform.lock.hcl
 .tfplan.txt
+
+docs/superpowers
