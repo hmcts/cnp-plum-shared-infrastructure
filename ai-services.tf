@@ -52,6 +52,17 @@ resource "azurerm_role_assignment" "plum_ai_services_openai_user" {
   principal_id         = "b2f0690f-1b5c-4b4e-988f-639314878f3b" # plum-sandbox-mi
 }
 
+# The AI Gateway calls this account as itself once the private endpoint routes to it,
+# so its managed identity needs data-plane access here. This is a data action, so it
+# is not covered by any control-plane role the gateway's subscription already holds.
+resource "azurerm_role_assignment" "ai_gateway_ai_services_openai_user" {
+  count = var.env == "sandbox" ? 1 : 0
+
+  scope                = module.ai_services[0].cognitive_account_id
+  role_definition_name = "Cognitive Services OpenAI User"
+  principal_id         = "4425c586-7c27-49a9-84bc-183ad2b8ce82" # sps-ai-sbox-mi (AI Gateway)
+}
+
 output "ai_services_cognitive_account_id" {
   value       = length(module.ai_services) == 0 ? null : module.ai_services[0].cognitive_account_id
   description = "ID of the plum AI Services cognitive account (sandbox only; null elsewhere)."
