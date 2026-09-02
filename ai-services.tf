@@ -56,7 +56,7 @@ module "document_intelligence" {
   env         = var.env
   product     = var.product
   project     = var.project
-  component   = "document-intelligence"
+  component   = "doc-intelligence"
   common_tags = local.tags
 
   existing_resource_group_name = azurerm_resource_group.shared_resource_group.name
