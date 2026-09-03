@@ -44,6 +44,38 @@ module "ai_services" {
   }
 }
 
+module "document_intelligence" {
+  count = var.env == "sandbox" ? 1 : 0
+
+  source = "github.com/hmcts/terraform-module-ai-services?ref=main"
+
+  providers = {
+    azurerm.private_dns = azurerm # required alias; unused since enable_managed_network = false skips all PE/DNS lookups
+  }
+
+  env         = var.env
+  product     = var.product
+  project     = var.project
+  component   = "doc-intelligence"
+  common_tags = local.tags
+
+  existing_resource_group_name = azurerm_resource_group.shared_resource_group.name
+  location                     = var.location
+
+  create_ai_foundry        = false
+  create_storage_account   = false
+  create_cognitive_account = true
+  enable_managed_network   = false
+
+  cognitive_account_kind = "FormRecognizer"
+  cognitive_account_sku  = "S0"
+
+  public_network_access_cognitive                      = false
+  cognitive_account_network_acls_default_action        = "Deny"
+  cognitive_account_local_auth_enabled                 = false
+  cognitive_account_outbound_network_access_restricted = true
+}
+
 resource "azurerm_role_assignment" "plum_ai_services_openai_user" {
   count = var.env == "sandbox" ? 1 : 0
 
@@ -63,12 +95,19 @@ resource "azurerm_role_assignment" "ai_gateway_ai_services_openai_user" {
   principal_id         = "4425c586-7c27-49a9-84bc-183ad2b8ce82" # sps-ai-sbox-mi (AI Gateway)
 }
 
-output "ai_services_cognitive_account_id" {
-  value       = length(module.ai_services) == 0 ? null : module.ai_services[0].cognitive_account_id
-  description = "ID of the plum AI Services cognitive account (sandbox only; null elsewhere)."
+resource "azurerm_role_assignment" "plum_document_intelligence_user" {
+  count = var.env == "sandbox" ? 1 : 0
+
+  scope                = module.document_intelligence[0].cognitive_account_id
+  role_definition_name = "Cognitive Services User"
+  principal_id         = "b2f0690f-1b5c-4b4e-988f-639314878f3b" # plum-sandbox-mi
 }
 
-output "ai_services_cognitive_account_endpoint" {
-  value       = length(module.ai_services) == 0 ? null : one(module.ai_services[0].cognitive_account_endpoint)
-  description = "Endpoint of the plum AI Services cognitive account (sandbox only; null elsewhere)."
+resource "azurerm_role_assignment" "ai_gateway_document_intelligence_user" {
+  count = var.env == "sandbox" ? 1 : 0
+
+  scope                = module.document_intelligence[0].cognitive_account_id
+  role_definition_name = "Cognitive Services User"
+  principal_id         = "4425c586-7c27-49a9-84bc-183ad2b8ce82" # sps-ai-sbox-mi (AI Gateway)
 }
+
