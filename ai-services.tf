@@ -46,7 +46,7 @@ module "ai_services" {
 
 module "document_intelligence" {
   count = var.env == "sandbox" ? 1 : 0
-
+  existing_cognitive_account_name = "${var.product}-doc-intelligence-${var.env}"
   source = "github.com/hmcts/terraform-module-ai-services?ref=main"
 
   providers = {
