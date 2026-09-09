@@ -6,7 +6,7 @@
 module "ai_services" {
   count = var.env == "sandbox" ? 1 : 0
 
-  source = "github.com/hmcts/terraform-module-ai-services?ref=main"
+  source = "git@github.com:hmcts/terraform-module-ai-services?ref=main"
 
   providers = {
     azurerm.private_dns = azurerm # required alias; unused since enable_managed_network = false skips all PE/DNS lookups
@@ -47,7 +47,7 @@ module "ai_services" {
 module "document_intelligence" {
   count                           = var.env == "sandbox" ? 1 : 0
   existing_cognitive_account_name = "${var.product}-doc-intelligence-${var.env}"
-  source                          = "github.com/hmcts/terraform-module-ai-services?ref=main"
+  source                          = "git@github.com:hmcts/terraform-module-ai-services?ref=main"
 
   providers = {
     azurerm.private_dns = azurerm # required alias; unused since enable_managed_network = false skips all PE/DNS lookups
