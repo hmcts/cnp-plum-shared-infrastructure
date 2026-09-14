@@ -17,3 +17,13 @@ output "document_intelligence_cognitive_account_endpoint" {
   value       = length(module.document_intelligence) == 0 ? null : one(module.document_intelligence[0].cognitive_account_endpoint)
   description = "Endpoint of the crumble Document Intelligence cognitive account (sandbox only; null elsewhere)."
 }
+
+output "speech_services_cognitive_account_id" {
+  value       = length(module.speech_services) == 0 ? null : module.speech_services[0].cognitive_account_id
+  description = "ID of the plum Speech Services cognitive account (sandbox only; null elsewhere)."
+}
+
+output "speech_services_cognitive_account_endpoint" {
+  value       = length(module.speech_services) == 0 ? null : one(module.speech_services[0].cognitive_account_endpoint)
+  description = "Endpoint of the plum Speech Services cognitive account (sandbox only; null elsewhere)."
+}
