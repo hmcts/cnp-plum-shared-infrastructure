@@ -76,6 +76,38 @@ module "document_intelligence" {
   cognitive_account_outbound_network_access_restricted = true
 }
 
+module "speech_services" {
+  count                           = var.env == "sandbox" ? 1 : 0
+  existing_cognitive_account_name = "${var.product}-speech-${var.env}"
+  source                          = "git@github.com:hmcts/terraform-module-ai-services?ref=main"
+
+  providers = {
+    azurerm.private_dns = azurerm # required alias; unused since enable_managed_network = false skips all PE/DNS lookups
+  }
+
+  env         = var.env
+  product     = var.product
+  project     = var.project
+  component   = "speech"
+  common_tags = local.tags
+
+  existing_resource_group_name = azurerm_resource_group.shared_resource_group.name
+  location                     = var.location
+
+  create_ai_foundry        = false
+  create_storage_account   = false
+  create_cognitive_account = true
+  enable_managed_network   = false
+
+  cognitive_account_kind = "SpeechServices"
+  cognitive_account_sku  = "S0"
+
+  public_network_access_cognitive                      = false
+  cognitive_account_network_acls_default_action        = "Deny"
+  cognitive_account_local_auth_enabled                 = false
+  cognitive_account_outbound_network_access_restricted = true
+}
+
 resource "azurerm_role_assignment" "plum_ai_services_openai_user" {
   count = var.env == "sandbox" ? 1 : 0
 
@@ -111,3 +143,18 @@ resource "azurerm_role_assignment" "ai_gateway_document_intelligence_user" {
   principal_id         = "4425c586-7c27-49a9-84bc-183ad2b8ce82" # sps-ai-sbox-mi (AI Gateway)
 }
 
+resource "azurerm_role_assignment" "plum_speech_services_user" {
+  count = var.env == "sandbox" ? 1 : 0
+
+  scope                = module.speech_services[0].cognitive_account_id
+  role_definition_name = "Cognitive Services Speech User"
+  principal_id         = "b2f0690f-1b5c-4b4e-988f-639314878f3b" # plum-sandbox-mi
+}
+
+resource "azurerm_role_assignment" "ai_gateway_speech_services_user" {
+  count = var.env == "sandbox" ? 1 : 0
+
+  scope                = module.speech_services[0].cognitive_account_id
+  role_definition_name = "Cognitive Services Speech User"
+  principal_id         = "4425c586-7c27-49a9-84bc-183ad2b8ce82" # sps-ai-sbox-mi (AI Gateway)
+}
