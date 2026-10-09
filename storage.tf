@@ -13,16 +13,45 @@ module "speech_audio_storage" {
   common_tags               = local.tags
 
   default_action                  = "Deny"
-  public_network_access_enabled   = true
-  sa_subnets                      = local.speech_storage_subnets
+  public_network_access_enabled   = false
   allow_nested_items_to_be_public = false
   managed_identity_object_id      = azurerm_role_assignment.plum_speech_services_user[0].principal_id
   role_assignments                = ["Storage Blob Data Contributor"]
+}
 
-  containers = [
-    {
-      name        = "audio"
-      access_type = "private"
-    }
-  ]
+resource "azurerm_private_endpoint" "speech_audio_storage" {
+  count    = var.env == "sandbox" ? 1 : 0
+  provider = azurerm.private_endpoint
+
+  name                = "${module.speech_audio_storage[0].storageaccount_name}-endpoint"
+  resource_group_name = data.azurerm_resource_group.speech_storage_network[0].name
+  location            = data.azurerm_resource_group.speech_storage_network[0].location
+  subnet_id           = data.azurerm_subnet.speech_storage_private_endpoint[0].id
+
+  private_service_connection {
+    name                           = "${module.speech_audio_storage[0].storageaccount_name}-blob"
+    private_connection_resource_id = module.speech_audio_storage[0].storageaccount_id
+    subresource_names              = ["blob"]
+    is_manual_connection           = false
+  }
+
+  private_dns_zone_group {
+    name                 = "endpoint-dnszonegroup"
+    private_dns_zone_ids = ["/subscriptions/1baf5470-1c3e-40d3-a6f7-74bfbce4b348/resourceGroups/core-infra-intsvc-rg/providers/Microsoft.Network/privateDnsZones/privatelink.blob.core.windows.net"]
+  }
+
+  tags = local.tags
+}
+
+resource "azurerm_storage_container" "speech_audio" {
+  count = var.env == "sandbox" ? 1 : 0
+
+  name                  = "audio"
+  storage_account_id    = module.speech_audio_storage[0].storageaccount_id
+  container_access_type = "private"
+}
+
+moved {
+  from = module.speech_audio_storage[0].azurerm_storage_container.container["audio"]
+  to   = azurerm_storage_container.speech_audio[0]
 }

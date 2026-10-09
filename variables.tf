@@ -86,11 +86,6 @@ variable "managed_identity_object_id" {
 
 variable "aks_subscription_id" {}
 
-variable "mgmt_subscription_id" {
-  type        = string
-  description = "Management subscription ID, injected by the pipeline as TF_VAR_mgmt_subscription_id."
-}
-
 variable "create_chart_tests_mi" {
   default = false
 }

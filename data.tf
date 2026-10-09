@@ -1,17 +1,22 @@
-data "azurerm_subnet" "cft_aks" {
-  for_each = var.env == "sandbox" ? toset(["aks-00", "aks-01"]) : toset([])
+data "azurerm_resource_group" "speech_storage_network" {
+  count    = var.env == "sandbox" ? 1 : 0
   provider = azurerm.private_endpoint
 
-  name                 = each.value
-  virtual_network_name = local.cft_aks_network_name
-  resource_group_name  = local.cft_aks_network_rg_name
+  name = local.cft_aks_network_rg_name
 }
 
-data "azurerm_subnet" "jenkins" {
-  for_each = var.env == "sandbox" ? toset(["iaas", "aks-00", "aks-01"]) : toset([])
-  provider = azurerm.mgmt
+data "azurerm_subnet" "speech_storage_private_endpoint" {
+  count    = var.env == "sandbox" ? 1 : 0
+  provider = azurerm.private_endpoint
 
-  name                 = each.value
-  virtual_network_name = "cft-ptlsbox-vnet"
-  resource_group_name  = "cft-ptlsbox-network-rg"
+  name                 = "private-endpoints"
+  virtual_network_name = local.cft_aks_network_name
+  resource_group_name  = data.azurerm_resource_group.speech_storage_network[0].name
+
+  lifecycle {
+    postcondition {
+      condition     = lower(self.id) == lower("/subscriptions/b72ab7b7-723f-4b18-b6f6-03b0f2c6a1bb/resourceGroups/cft-sbox-network-rg/providers/Microsoft.Network/virtualNetworks/cft-sbox-vnet/subnets/private-endpoints")
+      error_message = "Speech Storage must use the supplied CFT sbox private-endpoints subnet; check aks_subscription_id."
+    }
+  }
 }
