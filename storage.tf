@@ -24,8 +24,8 @@ resource "azurerm_private_endpoint" "speech_audio_storage" {
   provider = azurerm.private_endpoint
 
   name                = "${module.speech_audio_storage[0].storageaccount_name}-endpoint"
-  resource_group_name = data.azurerm_resource_group.speech_storage_network[0].name
-  location            = data.azurerm_resource_group.speech_storage_network[0].location
+  resource_group_name = local.cft_aks_network_rg_name
+  location            = var.location
   subnet_id           = data.azurerm_subnet.speech_storage_private_endpoint[0].id
 
   private_service_connection {
