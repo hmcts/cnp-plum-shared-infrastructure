@@ -44,13 +44,3 @@ resource "azurerm_role_assignment" "speech_audio_reader" {
 
   depends_on = [module.speech_audio_storage]
 }
-
-resource "azurerm_key_vault_secret" "speech_storage_account_name" {
-  count = var.env == "sandbox" ? 1 : 0
-
-  name         = "azure-storage-account-name"
-  value        = module.speech_audio_storage[0].storageaccount_name
-  key_vault_id = module.vault.key_vault_id
-
-  depends_on = [module.vault]
-}
