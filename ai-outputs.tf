@@ -27,3 +27,8 @@ output "speech_services_cognitive_account_endpoint" {
   value       = length(module.speech_services) == 0 ? null : one(module.speech_services[0].cognitive_account_endpoint)
   description = "Endpoint of the plum Speech Services cognitive account (sandbox only; null elsewhere)."
 }
+
+output "speech_storage_account_name" {
+  value       = var.env == "sandbox" ? module.speech_audio_storage[0].storageaccount_name : null
+  description = "Speech audio storage account name (sandbox only; null elsewhere)."
+}
