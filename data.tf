@@ -12,6 +12,6 @@ data "azurerm_subnet" "jenkins" {
   provider = azurerm.mgmt
 
   name                 = each.value
-  virtual_network_name = "cft-ptl-vnet"
-  resource_group_name  = "cft-ptl-network-rg"
+  virtual_network_name = "cft-ptlsbox-vnet"
+  resource_group_name  = "cft-ptlsbox-network-rg"
 }
