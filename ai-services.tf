@@ -102,10 +102,32 @@ module "speech_services" {
   cognitive_account_kind = "SpeechServices"
   cognitive_account_sku  = "S0"
 
-  public_network_access_cognitive                      = false
-  cognitive_account_network_acls_default_action        = "Deny"
-  cognitive_account_local_auth_enabled                 = false
-  cognitive_account_outbound_network_access_restricted = true
+  public_network_access_cognitive               = false
+  cognitive_account_network_acls_default_action = "Deny"
+  cognitive_account_local_auth_enabled          = false
+
+  # Allow Blob URL fetching; the shared module does not expose an FQDN allowlist.
+  cognitive_account_outbound_network_access_restricted = false
+}
+
+resource "azurerm_key_vault_secret" "speech_endpoint" {
+  count = var.env == "sandbox" ? 1 : 0
+
+  name         = "azure-speech-endpoint"
+  value        = one(module.speech_services[0].cognitive_account_endpoint)
+  key_vault_id = module.vault.key_vault_id
+
+  depends_on = [module.vault]
+}
+
+resource "azurerm_key_vault_secret" "speech_resource_id" {
+  count = var.env == "sandbox" ? 1 : 0
+
+  name         = "azure-speech-resource-id"
+  value        = module.speech_services[0].cognitive_account_id
+  key_vault_id = module.vault.key_vault_id
+
+  depends_on = [module.vault]
 }
 
 resource "azurerm_role_assignment" "plum_ai_services_openai_user" {
