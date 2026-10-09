@@ -106,8 +106,7 @@ module "speech_services" {
   cognitive_account_network_acls_default_action = "Deny"
   cognitive_account_local_auth_enabled          = false
 
-  # Allow Blob URL fetching; the shared module does not expose an FQDN allowlist.
-  cognitive_account_outbound_network_access_restricted = false
+  cognitive_account_outbound_network_access_restricted = true
 }
 
 resource "azurerm_role_assignment" "plum_ai_services_openai_user" {

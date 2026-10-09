@@ -19,28 +19,10 @@ module "speech_audio_storage" {
   managed_identity_object_id      = azurerm_role_assignment.plum_speech_services_user[0].principal_id
   role_assignments                = ["Storage Blob Data Contributor"]
 
-  # Resource-instance firewall rule, not a Storage private endpoint.
-  private_link_access = {
-    speech = {
-      endpoint_resource_id = module.speech_services[0].cognitive_account_id
-      endpoint_tenant_id   = var.tenant_id
-    }
-  }
-
   containers = [
     {
       name        = "audio"
       access_type = "private"
     }
   ]
-}
-
-resource "azurerm_role_assignment" "speech_audio_reader" {
-  count = var.env == "sandbox" ? 1 : 0
-
-  scope                = "${module.speech_audio_storage[0].storageaccount_id}/blobServices/default/containers/audio"
-  role_definition_name = "Storage Blob Data Reader"
-  principal_id         = one(module.speech_services[0].cognitive_account_identity)
-
-  depends_on = [module.speech_audio_storage]
 }

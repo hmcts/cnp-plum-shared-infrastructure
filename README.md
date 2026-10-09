@@ -20,9 +20,3 @@ This repository contains the shared the common infra components per Deployment T
 ## Traffic Manager
 
 This module builds Traffic Manager which points to Application Gateway endpoints which then points to the hostname of the web app.
-
-## Speech Storage networking (sandbox)
-
-The Jenkins subnet lookups use `mgmt_subscription_id` for the PTLsbox subscription,
-with `cft-ptlsbox-vnet` in `cft-ptlsbox-network-rg`. The application subnet lookups
-remain in `cft-sbox-vnet` in `cft-sbox-network-rg`, using `aks_subscription_id`.
