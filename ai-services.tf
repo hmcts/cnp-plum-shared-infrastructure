@@ -102,9 +102,10 @@ module "speech_services" {
   cognitive_account_kind = "SpeechServices"
   cognitive_account_sku  = "S0"
 
-  public_network_access_cognitive                      = false
-  cognitive_account_network_acls_default_action        = "Deny"
-  cognitive_account_local_auth_enabled                 = false
+  public_network_access_cognitive               = false
+  cognitive_account_network_acls_default_action = "Deny"
+  cognitive_account_local_auth_enabled          = false
+
   cognitive_account_outbound_network_access_restricted = true
 }
 
