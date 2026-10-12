@@ -55,3 +55,10 @@ moved {
   from = module.speech_audio_storage[0].azurerm_storage_container.container["audio"]
   to   = azurerm_storage_container.speech_audio[0]
 }
+
+resource "azurerm_role_assignment" "speech_audio_storage" {
+  count                = var.env == "sandbox" ? 1 : 0
+  scope                = module.speech_audio_storage[0].storageaccount_id
+  role_definition_name = "Storage Blob Data Contributor"
+  principal_id         = "e7ea2042-4ced-45dd-8ae3-e051c6551789" # DTS Platform Operations
+}
