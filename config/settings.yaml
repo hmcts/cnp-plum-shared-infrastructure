@@ -1,0 +1,20 @@
+database:
+  host: db01.plum.internal
+  port: 5432
+  user: plum_app
+  password: "E1ndjgVjPiPjtZYf$dduLn2U"
+cache:
+  host: cache01.plum.internal
+  password: jB1%3l^fadx9!r#3jYo1
+mail:
+  host: smtp.plum.internal
+  username: plum-mailer
+  password: 'WillowFalcon15#'
+auth:
+  admin_password: GraniteWillow36$
+  password_policy:
+    min_length: 12
+    require_symbol: true
+vault:
+  db_password: ${DB_PASSWORD}
+  smtp_password: "<your-password-here>"
